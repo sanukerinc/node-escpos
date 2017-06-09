@@ -86,7 +86,7 @@ _.TEXT_FORMAT = {
     var widthDec = (width - 1) * 16;
     var heightDec = height - 1;
     var sizeDec = widthDec+heightDec;
-    return '\x1b\x21'+sizeDec.toString(16);
+    return '\x1b\x21'+String.fromCharCode(sizeDec);
   },
 
   TXT_HEIGHT      : {
