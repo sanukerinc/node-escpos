@@ -227,18 +227,18 @@ Printer.prototype.style = function(type){
  * @return {[Printer]} printer [description]
  */
 Printer.prototype.size = function(width, height) {
-  if (2 >= width && 2 >= height) {
-    this.buffer.write(_.TEXT_FORMAT.TXT_NORMAL);
-    if (2 == width && 2 == height) {
-      this.buffer.write(_.TEXT_FORMAT.TXT_4SQUARE);
-    } else if (1 == width && 2 == height) {
-      this.buffer.write(_.TEXT_FORMAT.TXT_2HEIGHT);
-    } else if (2 == width && 1 == height) {
-      this.buffer.write(_.TEXT_FORMAT.TXT_2WIDTH);
-    }
-  } else {
-    this.buffer.write(_.TEXT_FORMAT.TXT_CUSTOM_SIZE(width, height));
-  }
+  // if (2 >= width && 2 >= height) {
+  //   this.buffer.write(_.TEXT_FORMAT.TXT_NORMAL);
+  //   if (2 == width && 2 == height) {
+  //     this.buffer.write(_.TEXT_FORMAT.TXT_4SQUARE);
+  //   } else if (1 == width && 2 == height) {
+  //     this.buffer.write(_.TEXT_FORMAT.TXT_2HEIGHT);
+  //   } else if (2 == width && 1 == height) {
+  //     this.buffer.write(_.TEXT_FORMAT.TXT_2WIDTH);
+  //   }
+  // } else {
+  this.buffer.write(_.TEXT_FORMAT.TXT_CUSTOM_SIZE(width, height));
+  // }
   return this;
 };
 
@@ -352,7 +352,7 @@ Printer.prototype.qrimage = function(content, options, callback){
  * @return {[type]}         [description]
  */
 Printer.prototype.image = function(image, density){
-  if(!(image instanceof Image)) 
+  if(!(image instanceof Image))
     throw new TypeError('Only escpos.Image supported');
   density = density || 'd24';
   var n = !!~[ 'd8', 's8' ].indexOf(density) ? 1 : 3;
@@ -377,11 +377,11 @@ Printer.prototype.image = function(image, density){
  * @return {[type]}       [description]
  */
 Printer.prototype.raster = function (image, mode) {
-  if(!(image instanceof Image)) 
+  if(!(image instanceof Image))
     throw new TypeError('Only escpos.Image supported');
   mode = mode || 'normal';
-  if (mode === 'dhdw' || 
-      mode === 'dwh'  || 
+  if (mode === 'dhdw' ||
+      mode === 'dwh'  ||
       mode === 'dhw') mode = 'dwdh';
   var raster = image.toRaster();
   var header = _.GSV0_FORMAT['GSV0_' + mode.toUpperCase()];
